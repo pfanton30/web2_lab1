@@ -1,4 +1,11 @@
 const db = require('./index');
+const {Pool} = require('pg');
+
+const pool = new Pool({
+    port: process.env.DATABASE_PORT,
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
 
 const createTablesQuery = `
   CREATE TABLE IF NOT EXISTS cycle (
