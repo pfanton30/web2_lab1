@@ -3,6 +3,7 @@ const router = express.Router();
 const Ticket = require('../models/TicketModel');
 const Cycle = require('../models/CycleModel');
 
+
 router.get('/', async (req, res) => {
     try {
         const lastCycle = await Cycle.findLastCycle();
@@ -14,15 +15,9 @@ router.get('/', async (req, res) => {
         if (lastCycle) {
             active = lastCycle.is_open;
             drawnNumbers = lastCycle.drawn_numbers;
-
-            const countRes = await db.query(
-                'SELECT COUNT(*) FROM ticket WHERE cycle_id = $1',
-                [lastCycle.id]
-            );
-            ticketCount = countRes.rows[0].count;
+            ticketCount = await Ticket.countByCycle(lastCycle.id);
         }
 
-        // todo: integriraj Auth0
         const user = req.session.user || null;
 
         res.render('index', {

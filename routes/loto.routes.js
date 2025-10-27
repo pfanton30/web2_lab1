@@ -104,4 +104,3 @@ router.get('/ticket/:id', async (req, res) => {
 });
 
 module.exports = router;
-

@@ -28,6 +28,11 @@ module.exports = class Ticket {
         return results
     }
 
+    static async countByCycle(cycle_id) {
+        const results = await dbCountTicketsByCycle(cycle_id);
+        return results;
+    }
+
 }
 
 dbCreateTicket = async (cycle_id, player_id, chosen_numbers) => {
@@ -52,5 +57,11 @@ dbFindTicketById = async (id) => {
         console.log(e);
         throw e
     }
+}
+
+const dbCountTicketsByCycle = async (cycle_id) => {
+    const sql = `SELECT COUNT(*) FROM ticket WHERE cycle_id = $1`;
+    const result = await db.query(sql, [cycle_id]);
+    return parseInt(result.rows[0].count, 10);
 }
 
