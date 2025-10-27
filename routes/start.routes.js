@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/Ticket');
-const Cycle = require('../models/Cycle');
+const Ticket = require('../models/TicketModel');
+const Cycle = require('../models/CycleModel');
 
 router.get('/', async (req, res) => {
     try {
