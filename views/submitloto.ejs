@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uplata loto listića</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    form { max-width: 400px; margin: auto; padding: 20px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    input { width: 100%; padding: 10px; margin-bottom: 15px; }
+    button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Uplata listića</h1>
+  <form method="POST" action="/tickets">
+    <label>Broj osobne iskaznice ili putovnice:</label>
+    <input type="text" name="player_id" maxlength="20" required>
+
+    <label>Odaberi 6-10 brojeva (1-45, odvojene zarezom):</label>
+    <input type="text" name="chosen_numbers" placeholder="npr. 3,5,12,22,33,41" required>
+
+    <button type="submit">Uplati</button>
+  </form>
+</body>
+</html>

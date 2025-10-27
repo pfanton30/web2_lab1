@@ -1,5 +1,37 @@
 const db = require('./index');
 
+const createTablesQuery = `
+  CREATE TABLE IF NOT EXISTS cycle (
+    id SERIAL PRIMARY KEY NOT NULL,
+    is_open BOOLEAN DEFAULT TRUE,
+    drawn_numbers INTEGER[],
+    creation_time TIMESTAMP DEFAULT NOW(),
+    closed_time TIMESTAMP
+  );
+
+  CREATE TABLE IF NOT EXISTS ticket (
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY;
+    cycle_id INTEGER REFERENCES cycle(id) ON DELETE CASCADE,
+    player_id VARCHAR(20) NOT NULL,
+    chosen_numbers INTEGER[] NOT NULL,
+    creation_time TIMESTAMP DEFAULT NOW()
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_tickets_round ON tickets(round_id);
+  `;
+
+async function createTables() {
+  try {
+    await pool.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto";');
+    await db.pool.query(createTablesQuery);
+    console.log('Tables created or already exists.');
+  } catch (error) {
+    console.error('Failed to create tables:', error);
+  }
+}
+
+createTables();
+
 const createSessionTableQuery = `
   CREATE TABLE IF NOT EXISTS session (
     sid VARCHAR PRIMARY KEY,
@@ -21,3 +53,5 @@ async function createSessionTable() {
 }
 
 createSessionTable();
+
+

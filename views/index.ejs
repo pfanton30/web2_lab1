@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loto</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f2f2; margin: 40px; }
+    .card { background: white; border-radius: 10px; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h1 { text-align: center; }
+    .section { margin-bottom: 20px; }
+    a.button { display: inline-block; padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Loto</h1>
+
+    <div class="section">
+      <% if (user) { %>
+        <p>Prijavljeni ste kao: <strong><%= user.name %></strong></p>
+        <form method="post" action="/logout">
+          <button type="submit">Odjava</button>
+        </form>
+      <% } else { %>
+        <p>Niste prijavljeni.</p>
+        <a href="/login" class="button">Prijava</a>
+      <% } %>
+    </div>
+
+    <div class="section">
+      <h3>Trenutno kolo:</h3>
+      <% if (ticketCount !== null) { %>
+        <p>Uplaćenih listića: <%= ticketCount %></p>
+      <% } else { %>
+        <p>Nema aktivnih kola.</p>
+      <% } %>
+    </div>
+
+    <div class="section">
+      <h3>Izvučeni brojevi:</h3>
+      <% if (drawnNumbers && drawnNumbers.length > 0) { %>
+        <p><%= drawnNumbers.join(', ') %></p>
+      <% } else { %>
+        <p>Brojevi još nisu izvučeni.</p>
+      <% } %>
+    </div>
+
+    <% if (active) { %>
+      <div class="section" style="text-align:center;">
+        <a href="/submitloto" class="button">Uplati listić</a>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
