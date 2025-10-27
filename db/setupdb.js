@@ -19,7 +19,7 @@ const createCycleTableQuery = `
 
 const createTicketTableQuery = `
   CREATE TABLE IF NOT EXISTS ticket (
-    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY;
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     cycle_id INTEGER REFERENCES cycle(id) ON DELETE CASCADE,
     player_id VARCHAR(20) NOT NULL,
     chosen_numbers INTEGER[] NOT NULL,
