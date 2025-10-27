@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node server.js",
-    "setupdb": "node db/setupdb.js"
+    "setupdb": "node db/setupdb.js",
     "start:deploy": "npm run setupdb && npm run start"
 }
   },
