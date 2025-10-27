@@ -28,7 +28,7 @@ const createTicketTableQuery = `
 `;
 
 const createTicketIndex = `
-  CREATE INDEX IF NOT EXISTS idx_tickets_round ON tickets(round_id)
+  CREATE INDEX IF NOT EXISTS idx_ticket_cycle ON ticket(cycle_id)
 `;
 
 async function createTables() {
