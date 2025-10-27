@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/Ticket');
-const Cycle = require('../models/Cycle');
+const Ticket = require('../models/TicketModel');
+const Cycle = require('../models/CycleModel');
 const QRCode = require('qrcode');
 const db = require('../db');
 
@@ -104,3 +104,4 @@ router.get('/ticket/:id', async (req, res) => {
 });
 
 module.exports = router;
+
