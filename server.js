@@ -5,6 +5,8 @@ const db = require('./db')
 const session = require('express-session')
 const pgSession = require('connect-pg-simple')(session)
 
+const setupDb = require('./db/setupdb');
+
 const startRouter = require('./routes/start.routes');
 const lotoRouter = require('./routes/loto.routes');
 
